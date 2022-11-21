@@ -7,13 +7,20 @@ const juego = {
     },
   
     // 2. Agrega el método verificaColision()
+   veirficaColision: function () {
+     if (bird.colision()) {
+        juego.terminar();
+
+      }
+    },
+
    
   
     loop: function () {
       bird.efectoGravedad();
       bird.dibujar(); 
       // 3. llama a juego.verificaColision();
-      
+      juego.verificaColision();
     },
   
     iniciar: function () {
@@ -22,13 +29,29 @@ const juego = {
     },
   
     // 6. Agrega el método terminar()
-  
+    terminar: function () {
+     clearInterval(juego.timerId);
+     juego.mostrarGameover();
+     juego.paraEfectos();
+    },
     
     // 4. Agrega el método mostrarGameOver()
-    
+    mostrarGameover: function () {
+      document.querySelector(".message");
+      let mensaje = document.querySelector(".message");
+      mensaje.setAttribute("id", "game-over")
+
+    },
 
     // 5. Agrega el método pararEfectos()
-    
+    pararEfectos: function () {
+      let ground = document.querySelector(".ground")
+      ground.removeAttribute("id")
+      let bird = document.querySelector(".bird")
+      bird.setAttribute("id", "fall")
+
+      bird.div.setAttribute("id", "fall");
+    },
   };
   
 
@@ -55,7 +78,12 @@ const bird = {
     },
 
     // 1. Agrega el método colision()
-  
+  colision: function() {
+    if (bird.bottom < 0) {
+      return true;
+
+    }
+  }
   
    
 }
